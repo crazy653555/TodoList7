@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   inputHint = '有話快說';
+  colspan = 2;
 }
