@@ -10,11 +10,13 @@ export class AppComponent {
   colspan = 2;
 
   todos: Array<any> = [];
+  todo = '';
 
-
-  addTodo($event) {
-    console.log($event);
-    this.todos = this.todos.concat($event.target.value);
+  addTodo() {
+    if (this.todo) {
+      this.todos = this.todos.concat(this.todo);
+      this.todo = '';
+    }
 
   }
 }
