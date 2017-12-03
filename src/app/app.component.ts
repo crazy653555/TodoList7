@@ -15,7 +15,7 @@ export class AppComponent {
 
   addTodo() {
     if (this.todo) {
-     let newTodo = {
+     const newTodo = {
         text: this.todo,
         done: false
       };
