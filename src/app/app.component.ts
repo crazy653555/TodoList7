@@ -8,7 +8,8 @@ import { Component } from "@angular/core";
 export class AppComponent {
   inputHint = "有話快說";
   colspan = 2;
-  filterType = 'All';
+  filterType = "All";
+  selectAll: boolean:false;
 
   todos: Array<any> = [];
   todo = "";
@@ -31,5 +32,9 @@ export class AppComponent {
   updateFilterType($event) {
     this.filterType = $event;
     console.log(this.filterType);
+  }
+
+  toggleAll(){
+    this.todos.forEach(item => item.done = this.selectAll);
   }
 }
