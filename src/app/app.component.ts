@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, transition } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
 
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   inputHint = "有話快說";
   colspan = 2;
   filterType = "All";
-  selectAll: boolean:false;
+  selectAll: boolean＝false;
 
   todos: Array<any> = [];
   todo = "";
@@ -68,7 +68,26 @@ export class AppComponent implements OnInit {
   }
 
   updateTodo(todo){
+    console.log('updateTodo');
     this.dataSev.updateTodo(todo)
     .subscribe();
+  }
+
+  enterEditMode(todo){
+    console.log('enterEditMode()');
+    todo.editText = todo.text;
+    todo.isEditMode = true;
+  }
+
+  saveEdit(todo) {
+        todo.text = todo.editText;
+        this.leaveEditMode(todo);
+      }
+
+  leaveEditMode(todo){
+    console.log('leaveEditMode()');
+    delete todo.editText;
+    delete todo.isEditMode;
+    this.updateTodo(todo);
   }
 }
