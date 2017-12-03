@@ -37,4 +37,8 @@ export class AppComponent {
   toggleAll(){
     this.todos.forEach(item => item.done = this.selectAll);
   }
+
+  removeTodo(todo){
+    this.todos = this.todos.filter(item => item !== todo);
+  }
 }
