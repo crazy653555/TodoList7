@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DataService } from './data.service';
 
 @Component({
   selector: "app-root",
@@ -15,12 +16,11 @@ export class AppComponent implements OnInit {
 
   todos: Array<any> = [];
   todo = "";
-  baseApi = 'http://localhost:3000/todos';
 
-  constructor(private http:HttpClient){}
+  constructor(private dataSev: DataService){}
 
   ngOnInit(): void {
-    this.http.get<any[]>(this.baseApi).subscribe(data => {
+    this.dataSev.getTodos().subscribe(data => {
       this.todos = data;
     });
   }
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
         done: false
       };
 
-      this.http.post<any[]>(this.baseApi, newTodo)
+      this.dataSev.postTodo(newTodo)
         .subscribe( data => {
           this.todos = this.todos.concat(newTodo);
           this.todo = '';
@@ -61,14 +61,14 @@ export class AppComponent implements OnInit {
   }
 
   removeTodo(todo){
-    this.http.delete(`${this.baseApi}/${todo.id}`)
+    this.dataSev.removeTodo(todo)
     .subscribe(data => {
       this.todos = this.todos.filter(item => item !== todo);
     });
   }
 
   updateTodo(todo){
-    this.http.put(`${this.baseApi}/${todo.id}`, todo)
+    this.dataSev.updateTodo(todo)
     .subscribe();
   }
 }
