@@ -34,5 +34,8 @@ export class FooterComponent implements OnInit, OnChanges {
     console.log('只要這個component有任人元件發生變動就會觸發');
   }
 
+  testFunction() {
+    console.log('footer test funtcion()');
+  }
 
 }
